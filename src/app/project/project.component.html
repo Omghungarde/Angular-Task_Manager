@@ -1,0 +1,111 @@
+<div class="project-container">
+    <h2>Project Details</h2>
+  
+    <!-- Add Project Button -->
+    <button class="btn-add-project" (click)="openModal()">Add New Project</button>
+  
+    <!-- Modal for Adding a Project -->
+    <div class="modal" *ngIf="showModal">
+        <div class="modal-content">
+          <span class="close" (click)="closeModal()">&times;</span>
+          <h3>Add New Project</h3>
+      
+          <form class="project-form" (ngSubmit)="addProject(projectForm)" #projectForm="ngForm">
+            <!-- Project Title -->
+            <div class="form-group">
+              <label for="projectName">Project Title</label>
+              <input type="text" id="projectName" [(ngModel)]="projectName" name="title" required #projectNameField="ngModel" class="form-control" />
+              <div *ngIf="projectNameField.invalid && projectNameField.touched" class="error-text">
+                Project title is required.
+              </div>
+            </div>
+      
+            <!-- Description -->
+            <div class="form-group">
+              <label for="description">Project Description</label>
+              <input type="text" id="description" [(ngModel)]="description" name="description" required #descriptionField="ngModel" class="form-control" />
+              <div *ngIf="descriptionField.invalid && descriptionField.touched" class="error-text">
+                Project description is required.
+              </div>
+            </div>
+      
+            <!-- Created By -->
+            <div class="form-group">
+              <label for="createdBy">Created By</label>
+              <input type="text" id="createdBy" [(ngModel)]="createdBy" name="createdBy" class="form-control" />
+            </div>
+      
+            <!-- Project Manager -->
+            <div class="form-group">
+              <label for="projectManager">Project Manager</label>
+              <input type="text" id="projectManager" [(ngModel)]="projectManager" name="projectManager" class="form-control" />
+            </div>
+      
+            <!-- Start Date -->
+            <div class="form-group">
+              <label for="startDate">Start Date</label>
+              <input type="date" id="startDate" [(ngModel)]="startDate" name="startDate" class="form-control" />
+            </div>
+      
+            <!-- End Date -->
+            <div class="form-group">
+              <label for="endDate">End Date</label>
+              <input type="date" id="endDate" [(ngModel)]="endDate" name="endDate" class="form-control" />
+            </div>
+      
+            <!-- Team Members -->
+            <div class="form-group">
+              <label for="teamMembers">Team Members</label>
+              <input type="text" id="teamMembers" [(ngModel)]="teamMembers" name="teamMembers" class="form-control" />
+            </div>
+      
+            <!-- Due Date -->
+            <div class="form-group">
+              <label for="dueDate">Due Date</label>
+              <input type="date" id="dueDate" [(ngModel)]="dueDate" name="dueDate" class="form-control" />
+            </div>
+      
+            <div class="form-actions">
+              <button type="submit" [disabled]="projectForm.invalid" class="btn btn-primary">Add Project</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+  
+    <!-- Table for displaying projects -->
+    <div class="project-list table-responsive">
+      <h3>Your Projects:</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created By</th>
+            <th>Project Manager</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Team Members</th>
+            <th>Due Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projects">
+            <td>{{ project.title }}</td>
+            <td>{{ project.description }}</td>
+            <td>{{ project.createdBy }}</td>
+            <td>{{ project.projectManager }}</td>
+            <td>{{ project.startDate }}</td>
+            <td>{{ project.endDate }}</td>
+            <td>{{ project.teamMembers }}</td>
+            <td>{{ project.dueDate }}</td>
+            <td>
+              <button (click)="deleteProject(project.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -1,0 +1,230 @@
+.project-container {
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .project-container h2 {
+    text-align: center;
+    color: #4a90e2;
+  }
+ 
+  .project-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .project-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  .project-form input {
+    width: 45%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  .project-form input.ng-invalid.ng-touched {
+    border-color: red;
+  }
+  .project-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .project-form button:hover {
+    background-color: #218838;
+  }
+  .error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  .project-list {
+    margin-top: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  .table th {
+    background-color: #45a049;
+    color: white;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .table button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .table button:hover {
+    background-color: #c0392b;
+  }
+  
+  .btn-add-project {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btn-add-project:hover {
+    background-color: #45a049;
+  }
+  
+  /* Modal Styles */
+  /* Modal Background */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+  
+  /* Close Button */
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Title */
+  h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  /* Form Group */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-group .form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .form-group .error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  /* Form Actions */
+  .form-actions {
+    text-align: center;
+  }
+  
+  .form-actions .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .form-actions .btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Modal Responsiveness */
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 15px;
+      width: 90%;
+    }
+  
+    .form-group .form-control {
+      padding: 8px;
+      font-size: 14px;
+    }
+  
+    h3 {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .modal-content {
+      width: 95%;
+      padding: 10px;
+    }
+  
+    .form-group .form-control {
+      font-size: 14px;
+    }
+  
+    .form-actions .btn {
+      padding: 8px 16px;
+    }
+  }
+  
