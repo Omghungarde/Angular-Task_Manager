@@ -1,11 +1,11 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, NgForm, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project',
-  imports: [NgFor, FormsModule,NgIf,NgClass, RouterLink],
+  imports:[FormsModule,NgClass,NgFor,NgIf],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
@@ -13,10 +13,13 @@ export class ProjectComponent implements OnInit {
   projects: any[] = [];
   loggedInUser: any;
   showModal: boolean = false;
+  isEditing: boolean = false;
+  editingProjectId: number | null = null;
 
   projectData = {
     title: '',
     description: '',
+    status: 'Pending',
     programManager: '',
     projectManager: '',
     startDate: '',
@@ -24,7 +27,8 @@ export class ProjectComponent implements OnInit {
     endDate: '',
     teamMembers: ''
   };
-  constructor(private router: Router) { }
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
@@ -35,43 +39,55 @@ export class ProjectComponent implements OnInit {
       return;
     }
 
-    this.loadProjects()
+    this.loadProjects();
   }
+
   loadProjects() {
     const allProjects = JSON.parse(localStorage.getItem('projects') || '[]');
     this.projects = allProjects.filter((project: any) => project.createdBy === this.loggedInUser.username);
   }
-  // Add a new project
-  addProject() {
+
+  openModal(edit: boolean, project?: any) {
+    this.showModal = true;
+    this.isEditing = edit;
+
+    if (edit && project) {
+      this.editingProjectId = project.id;
+      this.projectData = { ...project, teamMembers: project.teamMembers.join(', ') };
+    } else {
+      this.editingProjectId = null;
+      this.projectData = { title: '', description: '', status: 'Pending', programManager: '', projectManager: '', startDate: '', dueDate: '', endDate: '', teamMembers: '' };
+    }
+  }
+
+  saveProject() {
     if (!this.projectData.title || !this.projectData.description) {
       alert('Please fill in all required fields.');
       return;
     }
 
-    const allProjects = JSON.parse(localStorage.getItem('projects') || '[]');
+    let allProjects = JSON.parse(localStorage.getItem('projects') || '[]');
 
-    const newProject = {
-      id: allProjects.length + 1,
-      title: this.projectData.title,
-      description: this.projectData.description,
-      status: 'Pending',
-      createdBy: this.loggedInUser.username,
-      programManager: this.projectData.programManager,
-      projectManager: this.projectData.projectManager,
-      startDate: this.projectData.startDate,
-      dueDate: this.projectData.dueDate,
-      endDate: this.projectData.endDate,
-      teamMembers: this.projectData.teamMembers.split(',').map((m) => m.trim())
-    
-    };
+    if (this.isEditing && this.editingProjectId !== null) {
+      allProjects = allProjects.map((p: any) => {
+        if (p.id === this.editingProjectId) {
+          return { ...p, ...this.projectData, teamMembers: this.projectData.teamMembers.split(',').map(m => m.trim()) };
+        }
+        return p;
+      });
+    } else {
+      const newProject = {
+        id: allProjects.length ? Math.max(...allProjects.map((p: { id: number }) => p.id)) + 1 : 1,
+        ...this.projectData,
+        createdBy: this.loggedInUser.username,
+        teamMembers: this.projectData.teamMembers.split(',').map(m => m.trim())
+      };
+      allProjects.push(newProject);
+    }
 
-    allProjects.push(newProject);
     localStorage.setItem('projects', JSON.stringify(allProjects));
-
-    alert('Project added successfully!');
-    this.projectData = { title: '', description: '', programManager: '', projectManager: '', startDate: '', dueDate: '', endDate: '', teamMembers: '' };
     this.showModal = false;
-    this.loadProjects(); // Refresh project list
+    this.loadProjects();
   }
 
   deleteProject(projectId: number) {
@@ -82,21 +98,17 @@ export class ProjectComponent implements OnInit {
       this.loadProjects();
     }
   }
+
   openTask(projectId: number) {
-    this.router.navigate(['/task', projectId]); // Navigate to task details
+    this.router.navigate(['/task', projectId]);
   }
 
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
-      case 'high':
-        return 'status-high'; // CSS class for High priority
-      case 'medium':
-        return 'status-medium'; // CSS class for Medium priority
-      case 'low':
-        return 'status-low'; // CSS class for Low priority
-      default:
-        return 'status-pending'; // Default class for Pending or unknown status
+      case 'completed': return 'status-success';
+      case 'pending': return 'status-warning';
+      case 'overdue': return 'status-danger';
+      default: return 'status-pending';
     }
   }
-  
 }

@@ -38,7 +38,9 @@
     </div>
   
     <!-- Add Task Button -->
-    <button (click)="showModal = true">Add Task</button>
+    <div class="button-container">
+        <button class="add-project-btn" (click)="showModal = true">Add Task</button>
+      </div>
   
     <!-- Add Task Modal -->
     <div class="modal" *ngIf="showModal">
@@ -64,10 +66,10 @@
           <input type="text" [(ngModel)]="taskData.assignedUser" name="assignedUser" />
   
           <label>Estimate</label>
-          <input type="text" [(ngModel)]="taskData.estimate" name="estimate" />
+          <input type="number" [(ngModel)]="taskData.estimate" name="estimate" />
   
           <label>Time Spent</label>
-          <input type="text" [(ngModel)]="taskData.timeSpent" name="timeSpent" />
+          <input type="number" [(ngModel)]="taskData.timeSpent" name="timeSpent" />
   
           <button type="submit">Add Task</button>
         </form>
