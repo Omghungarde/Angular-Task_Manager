@@ -22,11 +22,10 @@ export class LoginComponent {
     );
   
     if (user) {
-      this.loginMessage = 'Login successful!';
-      localStorage.setItem('currentUser', JSON.stringify(user));
-      this.router.navigate(['/project']); 
+      localStorage.setItem('loggedInUser', JSON.stringify(user)); // Store logged-in user
+      this.router.navigate(['/project']); // Redirect to projects page
     } else {
-      this.loginMessage = 'Invalid username or password!';
+      alert('Invalid email or password');
     }
   }
   
