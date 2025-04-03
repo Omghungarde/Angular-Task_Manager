@@ -103,6 +103,16 @@ export class ProjectComponent implements OnInit {
   openTask(projectId: number) {
     this.router.navigate(['/task', projectId]);
   }
-
+  calculateDueDays(dueDate: string): string {
+    if (!dueDate) return 'N/A';
+  
+    const today = new Date();
+    const due = new Date(dueDate);
+    const timeDiff = due.getTime() - today.getTime();
+    const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
+  
+    return daysLeft >= 0 ? `${daysLeft} days left` : `Overdue by ${Math.abs(daysLeft)} days`;
+  }
+  
 
 }

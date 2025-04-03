@@ -17,6 +17,10 @@ export class TaskComponent implements OnInit {
   showModal: boolean = false;
   isEditing: boolean = false;
   editingTaskId:number| null = null;
+  searchQuery: string = '';
+  selectedStatus: string = '';
+  sortField: string = 'date';
+  sortOrder: 'asc' | 'desc' = 'asc';
   
   // taskData = {
   //   title: '',
@@ -59,8 +63,6 @@ export class TaskComponent implements OnInit {
     this.isEditing = true;
     this.showModal = true;
     this.editingTaskId = task.id;
-  
-    // Populate form with selected task data
     this.taskData = { ...task };
   }
 
@@ -114,7 +116,7 @@ export class TaskComponent implements OnInit {
     let allTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
 
     if (this.isEditing) {
-      // Update existing task
+      
       allTasks = allTasks.map((task: any) =>
         task.id === this.editingTaskId ? { ...task, ...this.taskData } : task
       );
@@ -122,7 +124,6 @@ export class TaskComponent implements OnInit {
       this.isEditing = false;
       this.editingTaskId = null;
     } else {
-      // Add new task
       const newTask = {
       id: allTasks.length + 1,
       title: this.taskData.title,
@@ -143,8 +144,16 @@ export class TaskComponent implements OnInit {
   this.showModal = false; // Close modal
 }
   
-  // // Update task status
-  // updateStatus(task: any, newStatus: string) {
-  //   task.status = newStatus;
-  // }
-}
+//   // // Update task status
+//   // updateStatus(task: any, newStatus: string) {
+//   //   task.status = newStatus;
+//   // }
+
+
+
+
+
+
+
+
+ }
