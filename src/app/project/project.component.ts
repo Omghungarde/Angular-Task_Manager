@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,7 +6,7 @@ import { StatusService } from '../service/status.service';
 
 @Component({
   selector: 'app-project',
-  imports:[FormsModule,NgClass,NgFor,NgIf],
+  imports:[FormsModule,NgFor,NgIf],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })

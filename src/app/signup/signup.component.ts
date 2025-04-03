@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
-import { User } from '../interfaces/user';
 
 
 @Component({
   selector: 'app-signup',
-  imports: [FormsModule,NgIf,RouterLink],
+  imports: [FormsModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -22,6 +20,7 @@ export class SignupComponent {
   signupMessage: string = '';
 
   constructor(private router: Router) {}
+  
   signUp() {
     if (!this.user.username || !this.user.email || !this.user.password || !this.user.confirmPassword) {
       this.signupMessage = 'All fields are required!';
