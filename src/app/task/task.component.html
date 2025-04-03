@@ -1,79 +1,85 @@
 <div class="container">
-    <h2>Task List</h2>
-  
-    <!-- Task Table -->
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Assigned To</th>
-            <th>Status</th>
-            <th>Assigned User</th>
-            <th>Estimate</th>
-            <th>Time Spent</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of tasks">
-            <td>{{ task.title }}</td>
-            <td>{{ task.assignedTo }}</td>
-            <td>
-              <select [(ngModel)]="task.status" (change)="updateStatus(task, task.status)">
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
-            </td>
-            <td>{{ task.assignedUser }}</td>
-            <td>{{ task.estimate }}</td>
-            <td>{{ task.timeSpent }}</td>
-            <td>
-              <button class="delete-btn" (click)="deleteTask(task.id)"><i class="fa-solid fa-trash-can"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- Add Task Button -->
-    <div class="button-container">
-        <button class="add-project-btn" (click)="showModal = true">Add Task</button>
-      </div>
-  
-    <!-- Add Task Modal -->
-    <div class="modal" *ngIf="showModal">
-      <div class="modal-content">
-        <span class="close" (click)="showModal = false">&times;</span>
-        <h3>Add New Task</h3>
-  
-        <form (ngSubmit)="addTask()">
-          <label>Title</label>
-          <input type="text" [(ngModel)]="taskData.title" name="title" required />
-  
-          <label>Assigned To</label>
-          <input type="text" [(ngModel)]="taskData.assignedTo" name="assignedTo" required />
-  
-          <label>Status</label>
-          <select [(ngModel)]="taskData.status" name="status">
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
-  
-          <label>Assigned User</label>
-          <input type="text" [(ngModel)]="taskData.assignedUser" name="assignedUser" />
-  
-          <label>Estimate</label>
-          <input type="number" [(ngModel)]="taskData.estimate" name="estimate" />
-  
-          <label>Time Spent</label>
-          <input type="number" [(ngModel)]="taskData.timeSpent" name="timeSpent" />
-  
-          <button type="submit">Add Task</button>
-        </form>
-      </div>
+  <h2>Task List</h2>
+
+  <!-- Task Table -->
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Assigned To</th>
+          <th>Status</th>
+          <th>Assigned User</th>
+          <th>Estimate</th>
+          <th>Time Spent</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks">
+          <td>{{ task.title }}</td>
+          <td>{{ task.assignedTo }}</td>
+          <td [class]="statusService.getStatusClass(task.status)">
+            <span>
+              {{ task.status }}
+            </span>
+          </td>
+          <td>{{ task.assignedUser }}</td>
+          <td>{{ task.estimate }}</td>
+          <td>{{ task.timeSpent }}</td>
+          <td>
+            <button class="edit-btn" (click)="editTask(task)">
+              edit
+
+            </button><br>
+            <button class="delete-btn" (click)="deleteTask(task.id)">delete</button>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+
+  <!-- Add Task Button -->
+  <div class="button-container">
+    <button class="add-project-btn" (click)="openAddTaskModal()">Add Task</button>
+  </div>
+
+
+  <!-- Add Task Modal -->
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <span class="close" (click)="showModal = false">&times;</span>
+      <h3>{{ isEditing ? 'Edit Task' : 'Add New Task' }}</h3>
+
+      <form (ngSubmit)="saveTask()">
+        <label>Title</label>
+        <input type="text" [(ngModel)]="taskData.title" name="title" required />
+
+        <label>Assigned To</label>
+        <input type="text" [(ngModel)]="taskData.assignedTo" name="assignedTo" required />
+
+        <label>Status</label>
+        <select [(ngModel)]="taskData.status" name="status">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+
+
+        <label>Assigned User</label>
+        <input type="text" [(ngModel)]="taskData.assignedUser" name="assignedUser" />
+
+        <label>Estimate</label>
+        <input type="number" [(ngModel)]="taskData.estimate" name="estimate" />
+
+        <label>Time Spent</label>
+        <input type="number" [(ngModel)]="taskData.timeSpent" name="timeSpent" />
+
+        <button type="submit">{{ isEditing ? 'Update Task' : 'Add Task' }}</button>
+      </form>
     </div>
   </div>
-  
+
+</div>

@@ -2,6 +2,7 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StatusService } from '../service/status.service';
 
 @Component({
   selector: 'app-project',
@@ -28,7 +29,7 @@ export class ProjectComponent implements OnInit {
     teamMembers: ''
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public statusService:StatusService) {}
 
   ngOnInit() {
     this.loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
@@ -103,12 +104,5 @@ export class ProjectComponent implements OnInit {
     this.router.navigate(['/task', projectId]);
   }
 
-  getStatusClass(status: string): string {
-    switch (status.toLowerCase()) {
-      case 'completed': return 'status-success';
-      case 'pending': return 'status-warning';
-      case 'overdue': return 'status-danger';
-      default: return 'status-pending';
-    }
-  }
+
 }

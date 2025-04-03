@@ -21,9 +21,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let project of projects">
-            <td (click)="openTask(project.id)">{{ project.title }}</td>
+            <td (click)="openTask(project.id)" style="cursor:pointer;">{{ project.title }}</td>
             <td>{{ project.description }}</td>
-            <td [ngClass]="getStatusClass(project.status)">
+            <td [class]="statusService.getStatusClass(project.status)">
               <span >
                 {{ project.status }}
               </span>
@@ -56,8 +56,8 @@
 </div>
 
 <!-- Modal -->
-<div class="modal" *ngIf="showModal">
-  <div class="modal-content">
+<div class="modal-overlay" *ngIf="showModal">
+  <div class="modal-container">
     <span class="close" (click)="showModal = false">&times;</span>
     <h3>{{ isEditing ? 'Edit Project' : 'Add New Project' }}</h3>
 
@@ -81,19 +81,29 @@
       <label>Project Manager</label>
       <input type="text" [(ngModel)]="projectData.projectManager" name="projectManager" />
 
-      <label>Start Date</label>
-      <input type="date" [(ngModel)]="projectData.startDate" name="startDate" />
+      <div class="date-group">
+        <div>
+          <label>Start Date</label>
+          <input type="date" [(ngModel)]="projectData.startDate" name="startDate" />
+        </div>
 
-      <label>Due Date</label>
-      <input type="date" [(ngModel)]="projectData.dueDate" name="dueDate" />
+        <div>
+          <label>Due Date</label>
+          <input type="date" [(ngModel)]="projectData.dueDate" name="dueDate" />
+        </div>
 
-      <label>End Date</label>
-      <input type="date" [(ngModel)]="projectData.endDate" name="endDate" />
+        <div>
+          <label>End Date</label>
+          <input type="date" [(ngModel)]="projectData.endDate" name="endDate" />
+        </div>
+      </div>
 
-      <label>Team Members (comma-separated)</label>
+      <label>Team Members</label>
       <input type="text" [(ngModel)]="projectData.teamMembers" name="teamMembers" />
 
       <button type="submit">{{ isEditing ? 'Update Project' : 'Save Project' }}</button>
     </form>
   </div>
 </div>
+
+

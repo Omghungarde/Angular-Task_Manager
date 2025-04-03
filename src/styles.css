@@ -5,4 +5,28 @@
   input, textarea, select {
     user-select: auto;
   }
+  .status-pending {
+    color: #ffc107; /* Yellow */
+    font-weight: bold;
+  }
+  
+  .status-in-progress {
+    color: #007bff; /* Blue */
+    font-weight: bold;
+  }
+  
+  .status-completed {
+    color: #28a745; /* Green */
+    font-weight: bold;
+  }
+
+  .status-overdue {
+    color: #520000; /* Green */
+    font-weight: bold;
+  }
+  
+  .status-default {
+    color: #6c757d; /* Gray */
+    font-weight: bold;
+  }
   
