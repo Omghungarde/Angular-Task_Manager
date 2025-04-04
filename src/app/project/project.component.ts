@@ -103,6 +103,7 @@ export class ProjectComponent implements OnInit {
   openTask(projectId: number) {
     this.router.navigate(['/task', projectId]);
   }
+  
   calculateDueDays(dueDate: string): string {
     if (!dueDate) return 'N/A';
   

@@ -73,17 +73,17 @@ export class StatusService {
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
       case 'pending':
-        return 'badge bg-warning';
+        return 'badge rounded-pill bg-warning';
       case 'pending(task)':
-        return 'badge bg-danger';
+        return 'badge rounded-pill bg-danger';
       case 'in progress':
-        return 'badge bg-warning';
+        return 'badge rounded-pill bg-warning';
       case 'completed':
-        return 'badge bg-success';
+        return 'badge rounded-pill bg-success';
       case 'overdue':
-        return 'badge bg-danger'; 
+        return 'badge rounded-pill bg-danger'; 
       default:
-        return 'badge bg-secondary';
+        return 'badge rounded-pill bg-secondary';
     }
   }
 }

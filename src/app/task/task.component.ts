@@ -6,7 +6,7 @@ import { StatusService } from '../service/status.service';
 
 @Component({
   selector: 'app-task',
-  imports: [NgIf,NgFor, FormsModule,NgClass],
+  imports: [NgIf,NgFor, FormsModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
@@ -153,20 +153,15 @@ export class TaskComponent implements OnInit {
 getStatusClass(status: string): string {
   switch (status.toLowerCase()) {
     case 'pending':
-      return 'badge bg-danger';
+      return 'badge rounded-pill bg-danger';
     case 'in progress':
-      return 'badge bg-warning';
+      return 'badge rounded-pill bg-warning';
     case 'completed':
-      return 'badge bg-success';
+      return 'badge rounded-pill bg-success';
     case 'overdue':
-      return 'badge bg-danger'; 
+      return 'badge rounded-pill bg-danger'; 
     default:
-      return 'badge bg-secondary';
+      return 'badge rounded-pill bg-secondary';
   }
 }
-
-
-
-
-
- }
+}
