@@ -23,8 +23,8 @@
           <tr *ngFor="let project of projects">
             <td (click)="openTask(project.id)" style="cursor:pointer;">{{ project.title }}</td>
             <td>{{ project.description }}</td>
-            <td [class]="statusService.getStatusClass(project.status)">
-              <span >
+            <td class="status-cell">
+              <span [class]="statusService.getStatusClass(project.status)">
                 {{ project.status }}
               </span>
             </td>

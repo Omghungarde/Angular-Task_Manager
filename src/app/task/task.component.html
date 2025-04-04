@@ -19,8 +19,8 @@
         <tr *ngFor="let task of tasks">
           <td>{{ task.title }}</td>
           <td>{{ task.assignedTo }}</td>
-          <td [class]="statusService.getStatusClass(task.status)">
-            <span>
+          <td class="status-cell">
+            <span [class]="getStatusClass(task.status)">
               {{ task.status }}
             </span>
           </td>
@@ -62,7 +62,7 @@
 
         <label>Status</label>
         <select [(ngModel)]="taskData.status" name="status">
-          <option value="Pending">Pending</option>
+          <option value="pending">pending</option>
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
         </select>
